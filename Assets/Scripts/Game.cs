@@ -1,6 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 
 // This script is to be added as a component to the Controller object.
@@ -18,6 +21,10 @@ public class Game : MonoBehaviour
     //Arrays to hold black and white pieces
     public GameObject[] playerBlack = new GameObject[21];
     public GameObject[] playerWhite = new GameObject[21];
+
+    private string currentPlayer;
+    private bool gameOver = false;
+    public TextMeshProUGUI messageText;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +53,7 @@ public class Game : MonoBehaviour
             Create("whiteElephant", 1, 9), Create("whiteCamel", 3, 9), Create("whiteCatapult", 5, 9),
             Create("whiteCatapult", 7, 9), Create("whiteCamel", 9, 9), Create("whiteElephant",11, 9),
             Create("whiteRoof", 1, 8), Create("whiteHorse", 2, 8),Create("whiteDebbabe", 3, 8),
-            Create("whiteGiraffe", 4, 8),Create("whiteQuenn", 5, 8), Create("whiteKing", 6, 8),
+            Create("whiteGiraffe", 4, 8),Create("whiteQueen", 5, 8), Create("whiteKing", 6, 8),
             Create("whiteCommander", 7, 8),Create("whiteGiraffe", 8, 8),Create("whiteDebbabe", 9, 8),
             Create("whiteHorse", 10, 8),Create("whiteRoof", 11, 8), Create("whiteRoofPawn", 1, 7), 
             Create("whiteHorsePawn", 2, 7), Create("whiteDebbabePawn", 3, 7),Create("whiteGiraffePawn", 4, 7),
@@ -63,7 +70,34 @@ public class Game : MonoBehaviour
         }
 
 
+        int randomNumber = Random.Range(0, 2);
+
+        if (randomNumber == 0)
+        {
+            
+            currentPlayer = "white";
+            messageText.text = "White Starts";
+        }else
+        {
+            currentPlayer = "black";
+            messageText.text = "Black Starts";
+        }
+
+        StartCoroutine(HideMessageAfterSeconds());
+
+        
     }
+
+    private IEnumerator HideMessageAfterSeconds()
+    {
+        // 
+        yield return new WaitForSeconds(3f);
+
+        // 
+        messageText.text = "";
+    }
+
+
 
     //This function creates the chesspieces with the given name at the given coordinates.
     public GameObject Create(string name, int x, int y)
@@ -106,6 +140,30 @@ public class Game : MonoBehaviour
     {
         if (x < 1 || y < 0 || x >= positions.GetLength(0)-1 || y >= positions.GetLength(1)) return false;
         return true;
+    }
+
+
+
+    public string GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameOver;
+    }
+
+    public void NextTurn()
+    {
+        if (currentPlayer == "white")
+        {
+            currentPlayer = "black";
+        }
+        else
+        {
+            currentPlayer = "white";
+        }
     }
 
 

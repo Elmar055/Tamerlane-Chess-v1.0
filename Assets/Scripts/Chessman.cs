@@ -21,12 +21,14 @@ public class Chessman : MonoBehaviour
     public Sprite blackKing, blackQueen, blackCommander, blackElephant, blackCamel, blackCatapult,
         blackDebbabe, blackGiraffe, blackHorse, blackRoof, blackKingPawn, blackQueenPawn,
         blackCommanderPawn, blackElephantPawn, blackCamelPawn, blackCatapultPawn,
-        blackDebbabePawn, blackGiraffePawn, blackHorsePawn, blackRoofPawn, blackPawnPawn;
+        blackDebbabePawn, blackGiraffePawn, blackHorsePawn, blackRoofPawn, blackPawnPawn,
+        blackPrince;
 
     public Sprite whiteKing, whiteQueen, whiteCommander, whiteElephant, whiteCamel, whiteCatapult,
         whiteDebbabe, whiteGiraffe, whiteHorse, whiteRoof, whiteKingPawn, whiteQueenPawn,
         whiteCommanderPawn, whiteElephantPawn, whiteCamelPawn, whiteCatapultPawn,
-        whiteDebbabePawn, whiteGiraffePawn, whiteHorsePawn, whiteRoofPawn, whitePawnPawn;
+        whiteDebbabePawn, whiteGiraffePawn, whiteHorsePawn, whiteRoofPawn, whitePawnPawn,
+        whitePrince;
 
     public Vector2Int GetPosition()
     {
@@ -140,10 +142,14 @@ public class Chessman : MonoBehaviour
 
     private void OnMouseUp()
     {
-        //Remove all moveplates relating to previously selected piece
-        DestroyMovePlates();
-        //Create new MovePlates
-        InitiateMovePlates();
+    //    if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
+    //    {
+            //Remove all moveplates relating to previously selected piece
+            DestroyMovePlates();
+            //Create new MovePlates
+            InitiateMovePlates();
+
+        //    }
     }
 
     public void DestroyMovePlates()
@@ -161,69 +167,192 @@ public class Chessman : MonoBehaviour
         switch (this.name)
         {
             case "blackPawnPawn":
+                
+                if (yBoard == 9 && player == "black")
+                {
+                    
+                }
                 PawnMovePlate(0,1);
                 break;
             case "whitePawnPawn":
+                // ilk defe yboard = 9 olanda hec bir dasa cevrilmir 
+                // yboard 9-a catanda orada gozleyir ve reqib daslar da onu vura bilmir
+                // eger reqibin bir piyonu iki dasi eyni anda vurma pozisyonuna catibsa das hemin piyonu vuraraq
+                // onun yerine kecir. eger pawn pawn ikince sefer sona catarsa prince olur.
+                //ikinci seferi etmek ucun if yboard==9 olanda bir deyisen tut ve onu bir artir ve bele yoxla
+                //alinmasa ag ve qarani ferqli chesspiecede tut
+                // engelleme isini moveplateattackspawnda edecen
+                // eger this.name = whitepawnpawn and player=black and chessmanposition.y=9 engelle
                 PawnMovePlate(0,-1);
                 break;
+
             case "blackCatapultPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackCatapult;
+                    this.name = "blackCatapult";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteCatapultPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteCatapult;
+                    this.name = "whiteCatapult";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackCamelPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackCamel;
+                    this.name = "blackCamel";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteCamelPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteCamel;
+                    this.name = "whiteCamel";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackElephantPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackElephant;
+                    this.name = "blackElephant";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteElephantPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteElephant;
+                    this.name = "whiteElephant";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackCommanderPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackCommander;
+                    this.name = "blackCommander";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteCommanderPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteCommander;
+                    this.name = "whiteCommander";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackKingPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackPrince;
+                    this.name = "blackPrince";
+                }
                 PawnMovePlate(0, 1);
-                break;
+                break; 
             case "whiteKingPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whitePrince;
+                    this.name = "whitePrince";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackQueenPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackQueen;
+                    this.name = "blackQueen";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteQueenPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteQueen;
+                    this.name = "whiteQueen";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackGiraffePawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackGiraffe;
+                    this.name = "blackGiraffe";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteGiraffePawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteGiraffe;
+                    this.name = "whiteGiraffe";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackDebbabePawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackDebbabe;
+                    this.name = "blackDebbabe";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteDebbabePawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteDebbabe;
+                    this.name = "whiteDebbabe";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackHorsePawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackHorse;
+                    this.name = "blackHorse";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteHorsePawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteHorse;
+                    this.name = "whiteHorse";
+                }
                 PawnMovePlate(0, -1);
                 break;
+
             case "blackRoofPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackRoof;
+                    this.name = "blackRoof";
+                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteRoofPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteRoof;
+                    this.name = "whiteRoof";
+                }
                 PawnMovePlate(0, -1);
                 break;
             //---------------------------------------------------------
@@ -292,6 +421,26 @@ public class Chessman : MonoBehaviour
             case "whiteDebbabe":
                 DebbabeMovePlate();
                 break;
+            case "blackPrince":
+                BlackKingMovePlate(1, 0);
+                BlackKingMovePlate(0, 1);
+                BlackKingMovePlate(1, 1);
+                BlackKingMovePlate(-1, 0);
+                BlackKingMovePlate(0, -1);
+                BlackKingMovePlate(-1, -1);
+                BlackKingMovePlate(-1, 1);
+                BlackKingMovePlate(1, -1);
+                break;
+            case "whitePrince":
+                WhiteKingMovePlate(1, 0);
+                WhiteKingMovePlate(0, 1);
+                WhiteKingMovePlate(1, 1);
+                WhiteKingMovePlate(-1, 0);
+                WhiteKingMovePlate(0, -1);
+                WhiteKingMovePlate(-1, -1);
+                WhiteKingMovePlate(-1, 1);
+                WhiteKingMovePlate(1, -1);
+                break;
 
 
         }
@@ -334,9 +483,9 @@ public class Chessman : MonoBehaviour
         int y = yBoard + yIncrement;
 
         
-        int x1 = xBoard;
-        int y1 = yBoard;
-        Chessman myChessman = sc.GetPosition(x1, y1)?.GetComponent<Chessman>();
+        int ownChessmanX = xBoard;
+        int ownChessManY = yBoard;
+        Chessman myChessman = sc.GetPosition(ownChessmanX, ownChessManY)?.GetComponent<Chessman>();
 
         Vector2Int chessmanPosition = myChessman.GetPosition();
 
@@ -347,12 +496,7 @@ public class Chessman : MonoBehaviour
             MovePlateSpawn(0, 8);
         }
 
-        if (chessmanPosition.x == 11 && chessmanPosition.y == 0 ||
-            chessmanPosition.x == 11 && chessmanPosition.y == 1 ||
-            chessmanPosition.x == 11 && chessmanPosition.y == 2)
-        {
-            MovePlateSpawn(12, 1);
-        }
+        
 
         if (sc.PositionOnBoard(x, y))
         {
@@ -382,18 +526,13 @@ public class Chessman : MonoBehaviour
         int y = yBoard + yIncrement;
 
 
-        int x1 = xBoard;
-        int y1 = yBoard;
-        Chessman myChessman = sc.GetPosition(x1, y1)?.GetComponent<Chessman>();
+        int ownChessmanX = xBoard;
+        int ownChessmanY = yBoard;
+        Chessman myChessman = sc.GetPosition(ownChessmanX, ownChessmanY)?.GetComponent<Chessman>();
 
         Vector2Int chessmanPosition = myChessman.GetPosition();
 
-        if (chessmanPosition.x == 1 && chessmanPosition.y == 8 ||
-            chessmanPosition.x == 1 && chessmanPosition.y == 9 ||
-            chessmanPosition.x == 1 && chessmanPosition.y == 7)
-        {
-            MovePlateSpawn(0, 8);
-        }
+        
 
         if (chessmanPosition.x == 11 && chessmanPosition.y == 0 ||
             chessmanPosition.x == 11 && chessmanPosition.y == 1 ||
@@ -662,6 +801,9 @@ public class Chessman : MonoBehaviour
         int x = xBoard + xIncrement;
         int y = yBoard + yIncrement;
 
+       
+
+
         if (sc.PositionOnBoard(x, y))
         {
             Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
@@ -680,10 +822,11 @@ public class Chessman : MonoBehaviour
             {
                 MovePlateAttackSpawn(x - 1, y);
              }
-            
-        }
-    }
 
+        }
+
+        
+    }
 
 
 
@@ -704,7 +847,6 @@ public class Chessman : MonoBehaviour
         y += -4.03f;
         //Set actual unity values
 
-        Debug.Log(x);
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.SetReference(gameObject);

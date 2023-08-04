@@ -29,15 +29,15 @@ public class MovePlate : MonoBehaviour
         matrixY = y;
     }
 
+    // This is used for detect attack
     public bool attack = false;
 
     public void Start()
     {
         if (attack)
         {
+            // Change color on attack
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-
-            //transform.localScale = new Vector2(1.4f, 1.4f);
         }
     }
 
@@ -63,6 +63,8 @@ public class MovePlate : MonoBehaviour
 
         //Update the matrix
         controller.GetComponent<Game>().SetPosition(reference);
+
+        controller.GetComponent<Game>().NextTurn();
 
         reference.GetComponent<Chessman>().DestroyMovePlates();
     }
