@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// This script is to be added as a component to the MovePlate prefab.
 public class MovePlate : MonoBehaviour
 {
+    // Reference to controller object with GameController tag
     public GameObject controller;
 
+    // To show the moveplate path
     GameObject reference = null;
 
+    // Moveplate position coordinates
     int matrixX;
     int matrixY;
 
+    // Function for gt positions of moveplate
     public Vector2Int GetPosition()
     {
         return new Vector2Int(matrixX, matrixY);
     }
 
-    // Pozisyonu ayarlayan fonksiyon
+    // Function that adjusts the moveplate position
     public void SetPosition(int x, int y)
     {
         matrixX = x;
