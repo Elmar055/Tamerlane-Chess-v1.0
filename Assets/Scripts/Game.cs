@@ -111,6 +111,7 @@ public class Game : MonoBehaviour
         return obj;
     }
 
+
     // Activate the object in the given position according to the indexes of the array
     // and move it to the position in the real scene
     public void SetPosition(GameObject obj)
