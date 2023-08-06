@@ -154,14 +154,14 @@ public class Chessman : MonoBehaviour
 
     private void OnMouseUp()
     {
-    //    if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
-    //    {
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
+        {
             //Remove all moveplates relating to previously selected piece
             DestroyMovePlates();
             //Create new MovePlates
             InitiateMovePlates();
 
-        //    }
+        }
     }
 
     public void DestroyMovePlates()
@@ -189,9 +189,9 @@ public class Chessman : MonoBehaviour
                             for (int j = 1; j < 11; j++)
                             {
 
-                                GameObject cp1 = sc.GetPosition(j - 1, yBoard - i); 
+                                GameObject cp1 = sc.GetPosition(j - 1, yBoard - i);
 
-                                GameObject cp2 = sc.GetPosition(j + 1, yBoard - i); 
+                                GameObject cp2 = sc.GetPosition(j + 1, yBoard - i);
 
                                 GameObject cp3 = sc.GetPosition(j, yBoard - (i + 1));
 
@@ -211,10 +211,8 @@ public class Chessman : MonoBehaviour
                         }
                     }
                 }
-                    PawnMovePlate(0,1);
+                PawnMovePlate(0, 1);
                 break;
-
-
             case "whitePawnPawn":
                 if (yBoard == 0 && player == "white")
                 {
@@ -226,7 +224,7 @@ public class Chessman : MonoBehaviour
                             for (int j = 1; j < 11; j++)
                             {
 
-                                GameObject cp1 = sc.GetPosition(j - 1, yBoard + i); 
+                                GameObject cp1 = sc.GetPosition(j - 1, yBoard + i);
 
                                 GameObject cp2 = sc.GetPosition(j + 1, yBoard + i);
 
@@ -248,176 +246,74 @@ public class Chessman : MonoBehaviour
                         }
                     }
                 }
-                PawnMovePlate(0,-1);
+                PawnMovePlate(0, -1);
                 break;
-
             case "blackCatapultPawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackCatapult;
-                    this.name = "blackCatapult";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteCatapultPawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteCatapult;
-                    this.name = "whiteCatapult";
-                }
                 PawnMovePlate(0, -1);
                 break;
-
             case "blackCamelPawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackCamel;
-                    this.name = "blackCamel";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteCamelPawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteCamel;
-                    this.name = "whiteCamel";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackElephantPawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackElephant;
-                    this.name = "blackElephant";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteElephantPawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteElephant;
-                    this.name = "whiteElephant";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackCommanderPawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackCommander;
-                    this.name = "blackCommander";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteCommanderPawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteCommander;
-                    this.name = "whiteCommander";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackKingPawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackPrince;
-                    this.name = "blackPrince";
-                }
                 PawnMovePlate(0, 1);
                 break; 
             case "whiteKingPawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whitePrince;
-                    this.name = "whitePrince";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackQueenPawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackQueen;
-                    this.name = "blackQueen";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteQueenPawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteQueen;
-                    this.name = "whiteQueen";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackGiraffePawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackGiraffe;
-                    this.name = "blackGiraffe";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteGiraffePawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteGiraffe;
-                    this.name = "whiteGiraffe";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackDebbabePawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackDebbabe;
-                    this.name = "blackDebbabe";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteDebbabePawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteDebbabe;
-                    this.name = "whiteDebbabe";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackHorsePawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackHorse;
-                    this.name = "blackHorse";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteHorsePawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteHorse;
-                    this.name = "whiteHorse";
-                }
                 PawnMovePlate(0, -1);
                 break;
 
             case "blackRoofPawn":
-                if (yBoard == 9 && player == "black")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = blackRoof;
-                    this.name = "blackRoof";
-                }
                 PawnMovePlate(0, 1);
                 break;
             case "whiteRoofPawn":
-                if (yBoard == 0 && player == "white")
-                {
-                    this.GetComponent<SpriteRenderer>().sprite = whiteRoof;
-                    this.name = "whiteRoof";
-                }
                 PawnMovePlate(0, -1);
                 break;
             //---------------------------------------------------------
@@ -759,7 +655,6 @@ public class Chessman : MonoBehaviour
         }
     }
 
-    // Yatay ve dikey olarak çapraz bir yönde taş var mı kontrol eder
     public bool HasPieceInDiagonalDirection(int startX, int startY, int endX, int endY)
     {
         int dx = Mathf.Abs(endX - startX);
@@ -969,6 +864,169 @@ public class Chessman : MonoBehaviour
         mpScript.attack = true;
         mpScript.SetReference(gameObject);
         mpScript.SetCoords(matrixX, matrixY);
+
+    }
+
+
+    public void Update()
+    {   
+        switch (this.name)
+        {
+            case "blackCatapultPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackCatapult;
+                    this.name = "blackCatapult";
+                }
+                break;
+            case "whiteCatapultPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteCatapult;
+                    this.name = "whiteCatapult";
+                }
+                break;
+            case "blackCamelPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackCamel;
+                    this.name = "blackCamel";
+                }
+                break;
+            case "whiteCamelPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteCamel;
+                    this.name = "whiteCamel";
+                }
+                break;
+
+            case "blackElephantPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackElephant;
+                    this.name = "blackElephant";
+                }
+                break;
+            case "whiteElephantPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteElephant;
+                    this.name = "whiteElephant";
+                }
+                break;
+
+            case "blackCommanderPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackCommander;
+                    this.name = "blackCommander";
+                }
+                break;
+            case "whiteCommanderPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteCommander;
+                    this.name = "whiteCommander";
+                }
+                break;
+
+            case "blackKingPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackPrince;
+                    this.name = "blackPrince";
+                }
+                break;
+            case "whiteKingPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whitePrince;
+                    this.name = "whitePrince";
+                }
+                break;
+
+            case "blackQueenPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackQueen;
+                    this.name = "blackQueen";
+                }
+                break;
+            case "whiteQueenPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteQueen;
+                    this.name = "whiteQueen";
+                }
+                break;
+
+            case "blackGiraffePawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackGiraffe;
+                    this.name = "blackGiraffe";
+                }
+                break;
+            case "whiteGiraffePawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteGiraffe;
+                    this.name = "whiteGiraffe";
+                }
+                break;
+
+            case "blackDebbabePawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackDebbabe;
+                    this.name = "blackDebbabe";
+                }
+                break;
+            case "whiteDebbabePawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteDebbabe;
+                    this.name = "whiteDebbabe";
+                }
+                break;
+
+            case "blackHorsePawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackHorse;
+                    this.name = "blackHorse";
+                }
+                break;
+            case "whiteHorsePawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteHorse;
+                    this.name = "whiteHorse";
+                }
+                break;
+
+            case "blackRoofPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackRoof;
+                    this.name = "blackRoof";
+                }
+                break;
+            case "whiteRoofPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whiteRoof;
+                    this.name = "whiteRoof";
+                }
+                break;
+        }
+    }
+
+    public bool IsValidMove(int targetX, int targetY)
+    {
+
+        return true;
     }
 
 

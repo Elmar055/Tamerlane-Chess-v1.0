@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 // This script is to be added as a component to the MovePlate prefab.
 public class MovePlate : MonoBehaviour
@@ -49,6 +48,10 @@ public class MovePlate : MonoBehaviour
         {
             GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX, matrixY);
 
+
+            if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("black");
+            if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("white");
+
             Destroy(cp);
         }
 
@@ -85,12 +88,6 @@ public class MovePlate : MonoBehaviour
         return reference;
     }
 
-
-
-
-    //------------------------------------------------------------------
-
-     
     
 
 }

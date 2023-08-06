@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -144,7 +146,6 @@ public class Game : MonoBehaviour
     }
 
 
-
     public string GetCurrentPlayer()
     {
         return currentPlayer;
@@ -155,8 +156,11 @@ public class Game : MonoBehaviour
         return gameOver;
     }
 
+    
     public void NextTurn()
     {
+
+        
         if (currentPlayer == "white")
         {
             currentPlayer = "black";
@@ -165,8 +169,70 @@ public class Game : MonoBehaviour
         {
             currentPlayer = "white";
         }
+        
+
+
+
     }
 
+    public void Update()
+    {
+        if (gameOver == true && Input.GetMouseButtonDown(0))
+        {
+            gameOver = false;
+
+            //Using UnityEngine.SceneManagement is needed here
+            SceneManager.LoadScene("Game"); //Restarts the game by loading the scene over again
+        }
+    }
+
+    public void Winner(string playerWinner)
+    {
+        gameOver = true;
+
+        //Using UnityEngine.UI is needed here
+        GameObject.FindGameObjectWithTag("WinnerText").GetComponent<TextMeshProUGUI>().enabled = true;
+        GameObject.FindGameObjectWithTag("WinnerText").GetComponent<TextMeshProUGUI>().text = playerWinner + " is the winner";
+
+        GameObject.FindGameObjectWithTag("RestartText").GetComponent<TextMeshProUGUI>().enabled = true;
+        GameObject.FindGameObjectWithTag("RestartText").GetComponent<TextMeshProUGUI>().text = "restart";
+    }
+
+    public bool IsKingInCheck(string player)
+    {
+        GameObject king = null;
+        if (player == "white")
+        {
+            king = playerWhite[11]; 
+        }
+        else if (player == "black")
+        {
+            king = playerBlack[11]; 
+        }
+
+        int kingX = king.GetComponent<Chessman>().GetXBoard();
+        int kingY = king.GetComponent<Chessman>().GetYBoard();
+
+        GameObject[] opponentPieces = (player == "white") ? playerBlack : playerWhite;
+
+        foreach (GameObject opponentPiece in opponentPieces)
+        {
+            Chessman opponentChessman = opponentPiece.GetComponent<Chessman>();
+            if (opponentChessman != null)
+            {
+                if (opponentChessman.IsValidMove(kingX, kingY))
+                {
+                    // The king is under attack
+                    return true;
+                }
+            }
+        }
+
+
+
+        return false;
+
+    }
 
 
 
