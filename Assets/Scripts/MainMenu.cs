@@ -10,4 +10,11 @@ public class MainMenu : MonoBehaviour
         // This is for switching between scenes
         SceneManager.LoadScene("Game");
     }
+
+
+    public void LoadMenuScene()
+    {
+        // This is for switching between scenes
+        SceneManager.LoadScene("MainMenu");
+    }
 }

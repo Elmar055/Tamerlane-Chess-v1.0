@@ -1,0 +1,14 @@
+Kralı vurmaq olmur. Kralı sadəcə kral vəzir bakan və şəhzadə vura bilər.
+Əgər kralı bütün daşların vura bilməsini dəyişmək istəsən, 
+daşların hərəkətlərində cp == "blackKing" şərtini qaldır.
+
+Kralı digər kral, vəzir, bakan, şəhzadə vursa oyun bitir. 
+Ekstra xanalara yalnız kral və şəhzadə girə bilir. 
+Qarşı tərəfin xanalarına şəhzadə və ya kral girərsə oyun bitir.
+
+Şəhzadə oyunda olmur. Yalnız kral piyonu qarşı tərəfin son sərhəddinə çatarsa şəhzadə yaranır.
+
+Digər piyonlar son sərhəddə çatarsa olduqları daşa məsələn zürafə piyonu zürafəyə çevrilir.
+
+Zürafənin hərəkəti 1 çarpaz və minimum 3 yatay və dikey olmalıdır. At kimi Daşların üzərindən keçə bilmir.
+Digər daşların hərəkəti rahatdır.

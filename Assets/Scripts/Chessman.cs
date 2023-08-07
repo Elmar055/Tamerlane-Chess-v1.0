@@ -418,6 +418,8 @@ public class Chessman : MonoBehaviour
         {
             Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
 
+            
+
             if (targetChessman == null)
             {
                 
@@ -443,9 +445,8 @@ public class Chessman : MonoBehaviour
             }
         }
 
-        
-
     }
+
 
     public void BlackKingMovePlate(int xIncrement, int yIncrement)
     {
@@ -466,8 +467,14 @@ public class Chessman : MonoBehaviour
         {
             MovePlateSpawn(0, 8);
         }
+        if (chessmanPosition.x == 11 && chessmanPosition.y == 0 ||
+            chessmanPosition.x == 11 && chessmanPosition.y == 1 ||
+            chessmanPosition.x == 11 && chessmanPosition.y == 2)
+        {
+            MovePlateSpawn(12, 1);
+        }
 
-        
+
 
         if (sc.PositionOnBoard(x, y))
         {
@@ -513,7 +520,12 @@ public class Chessman : MonoBehaviour
 
         Vector2Int chessmanPosition = myChessman.GetPosition();
 
-        
+        if (chessmanPosition.x == 1 && chessmanPosition.y == 8 ||
+            chessmanPosition.x == 1 && chessmanPosition.y == 9 ||
+            chessmanPosition.x == 1 && chessmanPosition.y == 7)
+        {
+            MovePlateSpawn(0, 8);
+        }
 
         if (chessmanPosition.x == 11 && chessmanPosition.y == 0 ||
             chessmanPosition.x == 11 && chessmanPosition.y == 1 ||
@@ -574,7 +586,8 @@ public class Chessman : MonoBehaviour
             Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
 
             if (cp.name == "blackPawnPawn" && targetChessman.GetPosition().y == 9
-                    || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0)
+                    || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0 
+                    || cp.name == "blackKing" || cp.name == "whiteKing")
             {
 
             }
@@ -582,6 +595,7 @@ public class Chessman : MonoBehaviour
             {
                 MovePlateAttackSpawn(x, y);
             }
+
         }
     }
 
@@ -774,7 +788,8 @@ public class Chessman : MonoBehaviour
             else if (cp.GetComponent<Chessman>().player != player)
             {
                 if(cp.name == "blackPawnPawn" && targetChessman.GetPosition().y == 9
-                    || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0)
+                    || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0
+                    || cp.name == "blackKing" || cp.name == "whiteKing")
                 {
 
                 }
@@ -795,25 +810,33 @@ public class Chessman : MonoBehaviour
         int y = yBoard + yIncrement;
 
        
-
-
         if (sc.PositionOnBoard(x, y))
         {
+
             Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
 
             if (targetChessman == null)
             {
                 MovePlateSpawn(x, y);
             }
-
-            if (sc.PositionOnBoard(x + 1, y) && sc.GetPosition(x + 1, y) != null && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
-            {
-                MovePlateAttackSpawn(x+1, y);
-            }
-            if (sc.PositionOnBoard(x - 1, y) && sc.GetPosition(x - 1, y) != null && sc.GetPosition(x - 1, y).GetComponent<Chessman>().player != player)
-            {
-                MovePlateAttackSpawn(x - 1, y);
-             }
+                if (sc.PositionOnBoard(x + 1, y) 
+                && sc.GetPosition(x + 1, y) != null 
+                && sc.GetPosition(x + 1, y).name != "blackKing"
+                && sc.GetPosition(x + 1, y).name != "whiteKing"
+                && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
+                {
+                    MovePlateAttackSpawn(x + 1, y);
+                }
+                if (sc.PositionOnBoard(x - 1, y) 
+                && sc.GetPosition(x - 1, y) != null
+                && sc.GetPosition(x - 1, y).name != "blackKing"
+                && sc.GetPosition(x - 1, y).name != "whiteKing"
+                && sc.GetPosition(x - 1, y).GetComponent<Chessman>().player != player)
+                {
+                    MovePlateAttackSpawn(x - 1, y);
+                }
+            
+            
 
         }
 
@@ -836,15 +859,17 @@ public class Chessman : MonoBehaviour
         x += -5.55f;
         y += -4.03f;
         //Set actual unity values
-
-        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
-        MovePlate mpScript = mp.GetComponent<MovePlate>();
-        mpScript.SetCoords(matrixX, matrixY);
-        mpScript.SetReference(gameObject);
+        // Check if there is a movePlate at this position
         
+            GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
+            MovePlate mpScript = mp.GetComponent<MovePlate>();
+            mpScript.SetCoords(matrixX, matrixY);
+            mpScript.SetReference(gameObject);
+        
+
     }
 
-
+    
     public void MovePlateAttackSpawn(int matrixX, int matrixY)
     {
         //Get the board value in order to convert to xy coords
@@ -859,13 +884,18 @@ public class Chessman : MonoBehaviour
         y += -4.03f;
         //Set actual unity values
         //Set actual unity values
-        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
-        MovePlate mpScript = mp.GetComponent<MovePlate>();
-        mpScript.attack = true;
-        mpScript.SetReference(gameObject);
-        mpScript.SetCoords(matrixX, matrixY);
+        
+        
+            GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
+            MovePlate mpScript = mp.GetComponent<MovePlate>();
+            mpScript.attack = true;
+            mpScript.SetReference(gameObject);
+            mpScript.SetCoords(matrixX, matrixY);
+        
+        
 
     }
+    
 
 
     public void Update()
@@ -1020,14 +1050,33 @@ public class Chessman : MonoBehaviour
                     this.name = "whiteRoof";
                 }
                 break;
+            case "blackKing":
+                if (xBoard == 0 && yBoard == 8 && player == "black")
+                {
+                    controller.GetComponent<Game>().Winner("Black");
+                }
+                break;
+            case "whiteKing":
+                if (xBoard == 12 && yBoard == 1 && player == "white")
+                {
+                    controller.GetComponent<Game>().Winner("White");
+                }
+                break;
+            case "blackPrince":
+                if (xBoard == 0 && yBoard == 8 && player == "black")
+                {
+                    controller.GetComponent<Game>().Winner("Black");
+                }
+                break;
+            case "whitePrince":
+                if (xBoard == 12 && yBoard == 1 && player == "white")
+                {
+                    controller.GetComponent<Game>().Winner("White");
+                }
+                break;
         }
     }
 
-    public bool IsValidMove(int targetX, int targetY)
-    {
-
-        return true;
-    }
 
 
 }

@@ -28,6 +28,7 @@ public class Game : MonoBehaviour
     private bool gameOver = false;
     public TextMeshProUGUI messageText;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -114,6 +115,8 @@ public class Game : MonoBehaviour
     }
 
 
+
+
     // Activate the object in the given position according to the indexes of the array
     // and move it to the position in the real scene
     public void SetPosition(GameObject obj)
@@ -194,46 +197,6 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("WinnerText").GetComponent<TextMeshProUGUI>().enabled = true;
         GameObject.FindGameObjectWithTag("WinnerText").GetComponent<TextMeshProUGUI>().text = playerWinner + " is the winner";
 
-        GameObject.FindGameObjectWithTag("RestartText").GetComponent<TextMeshProUGUI>().enabled = true;
-        GameObject.FindGameObjectWithTag("RestartText").GetComponent<TextMeshProUGUI>().text = "restart";
     }
-
-    public bool IsKingInCheck(string player)
-    {
-        GameObject king = null;
-        if (player == "white")
-        {
-            king = playerWhite[11]; 
-        }
-        else if (player == "black")
-        {
-            king = playerBlack[11]; 
-        }
-
-        int kingX = king.GetComponent<Chessman>().GetXBoard();
-        int kingY = king.GetComponent<Chessman>().GetYBoard();
-
-        GameObject[] opponentPieces = (player == "white") ? playerBlack : playerWhite;
-
-        foreach (GameObject opponentPiece in opponentPieces)
-        {
-            Chessman opponentChessman = opponentPiece.GetComponent<Chessman>();
-            if (opponentChessman != null)
-            {
-                if (opponentChessman.IsValidMove(kingX, kingY))
-                {
-                    // The king is under attack
-                    return true;
-                }
-            }
-        }
-
-
-
-        return false;
-
-    }
-
-
 
 }
