@@ -10,6 +10,7 @@ public class Chessman : MonoBehaviour
     //References to objects in our Unity Scene
     public GameObject controller;
     public GameObject movePlate;
+    public GameObject forwardMove;
 
     //Position for this Chesspiece on the Board
     //The correct position will be set later
@@ -20,17 +21,18 @@ public class Chessman : MonoBehaviour
     private string player;
 
 
+
     public Sprite blackKing, blackQueen, blackCommander, blackElephant, blackCamel, blackCatapult,
         blackDebbabe, blackGiraffe, blackHorse, blackRoof, blackKingPawn, blackQueenPawn,
         blackCommanderPawn, blackElephantPawn, blackCamelPawn, blackCatapultPawn,
         blackDebbabePawn, blackGiraffePawn, blackHorsePawn, blackRoofPawn, blackPawnPawn,
-        blackPrince;
+        blackPrince,blackPawnPawnFirstPromote, blackPawnPawnSecondPromote;
 
     public Sprite whiteKing, whiteQueen, whiteCommander, whiteElephant, whiteCamel, whiteCatapult,
         whiteDebbabe, whiteGiraffe, whiteHorse, whiteRoof, whiteKingPawn, whiteQueenPawn,
         whiteCommanderPawn, whiteElephantPawn, whiteCamelPawn, whiteCatapultPawn,
         whiteDebbabePawn, whiteGiraffePawn, whiteHorsePawn, whiteRoofPawn, whitePawnPawn,
-        whitePrince;
+        whitePrince, whitePawnPawnFirstPromote, whitePawnPawnSecondPromote;
 
     public string GetPlayer()
     {
@@ -179,6 +181,12 @@ public class Chessman : MonoBehaviour
         switch (this.name)
         {
             case "blackPawnPawn":
+                PawnMovePlate(0, 1);
+                break;
+            case "whitePawnPawn":
+                PawnMovePlate(0, -1);
+                break;
+            case "blackPawnPawnFirstPromote":
                 if (yBoard == 9 && player == "black")
                 {
                     Game sc = controller.GetComponent<Game>();
@@ -213,7 +221,7 @@ public class Chessman : MonoBehaviour
                 }
                 PawnMovePlate(0, 1);
                 break;
-            case "whitePawnPawn":
+            case "whitePawnPawnFirstPromote":
                 if (yBoard == 0 && player == "white")
                 {
                     Game sc = controller.GetComponent<Game>();
@@ -248,6 +256,8 @@ public class Chessman : MonoBehaviour
                 }
                 PawnMovePlate(0, -1);
                 break;
+                break;
+            
             case "blackCatapultPawn":
                 PawnMovePlate(0, 1);
                 break;
@@ -802,7 +812,6 @@ public class Chessman : MonoBehaviour
     }
 
    
-
     public void PawnMovePlate(int xIncrement, int yIncrement)
     {
         Game sc = controller.GetComponent<Game>();
@@ -892,11 +901,56 @@ public class Chessman : MonoBehaviour
             mpScript.SetReference(gameObject);
             mpScript.SetCoords(matrixX, matrixY);
         
-        
-
     }
-    
 
+    public void ForwardAttack(int matrixX, int matrixY)
+    {
+        //Get the board value in order to convert to xy coords
+        float x = matrixX;
+        float y = matrixY;
+        x *= 0.9215f;
+        y *= 0.8963f;
+
+        //Add constants (pos 0,0)
+        // daslarin pozisyonu
+        x += -5.55f;
+        y += -4.03f;
+        //Set actual unity values
+        //Set actual unity values
+
+
+        GameObject mp = Instantiate(forwardMove, new Vector3(x, y, -3.0f), Quaternion.identity);
+        
+    }
+
+    public bool PawnForwardAttackMove(int xIncrement, int yIncrement)
+    {
+        Game sc = controller.GetComponent<Game>();
+        int x = xBoard + xIncrement;
+        int y = yBoard + yIncrement;
+
+
+        if (sc.PositionOnBoard(x, y))
+        {
+            Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
+            ForwardAttack(x, y);
+            if(targetChessman!=null && targetChessman.name == "King")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void Start()
+    {
+        if(this.name == "blackKingPawn")
+        {
+            PawnForwardAttackMove(1, 1);
+            PawnForwardAttackMove(-1, 1);
+        }
+            
+    }
 
     public void Update()
     {   
@@ -1048,6 +1102,22 @@ public class Chessman : MonoBehaviour
                 {
                     this.GetComponent<SpriteRenderer>().sprite = whiteRoof;
                     this.name = "whiteRoof";
+                }
+                break;
+
+            case "blackPawnPawn":
+                if (yBoard == 9 && player == "black")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = blackPawnPawnFirstPromote;
+                    this.name = "blackPawnPawnFirstPromote";
+                }
+                break;
+
+            case "whitePawnPawn":
+                if (yBoard == 0 && player == "white")
+                {
+                    this.GetComponent<SpriteRenderer>().sprite = whitePawnPawnFirstPromote;
+                    this.name = "whitePawnPawnFirstPromote";
                 }
                 break;
             case "blackKing":

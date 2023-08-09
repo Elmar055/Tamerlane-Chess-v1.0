@@ -10,5 +10,10 @@ Qarşı tərəfin xanalarına şəhzadə və ya kral girərsə oyun bitir.
 
 Digər piyonlar son sərhəddə çatarsa olduqları daşa məsələn zürafə piyonu zürafəyə çevrilir.
 
+Piyonlar piyonu isə son sərhədə ilk dəfə çatarsa digər daşlar onu vura bilmir. 
+O vaxta qədər ki həmin piyon iki rəqib daşdan birini vura biləcək bir xanaya yerləşdirilsin. (Mənim oyunumda bura qədərdir)
+İkinci dəfə sərhədə çatarsa kral piyonunun başlanğıc nöqtəsinə yerləşdirilir.
+Üçüncü dəfə çatarsa yeni şəhzadəyə çevrilir.
+
 Zürafənin hərəkəti 1 çarpaz və minimum 3 yatay və dikey olmalıdır. At kimi Daşların üzərindən keçə bilmir.
 Digər daşların hərəkəti rahatdır.
