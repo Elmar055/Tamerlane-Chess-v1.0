@@ -56,7 +56,7 @@ public class Game : MonoBehaviour
             Create("whiteElephant", 1, 9), Create("whiteCamel", 3, 9), Create("whiteCatapult", 5, 9),
             Create("whiteCatapult", 7, 9), Create("whiteCamel", 9, 9), Create("whiteElephant",11, 9),
             Create("whiteRoof", 1, 8), Create("whiteHorse", 2, 8),Create("whiteDebbabe", 3, 8),
-            Create("whiteGiraffe", 4, 8),Create("whiteQueen", 5, 8), Create("whiteKing", 7, 3),
+            Create("whiteGiraffe", 4, 8),Create("whiteQueen", 5, 8), Create("whiteKing", 6, 8),
             Create("whiteCommander", 7, 8),Create("whiteGiraffe", 8, 8),Create("whiteDebbabe", 9, 8),
             Create("whiteHorse", 10, 8),Create("whiteRoof", 11, 8), Create("whiteRoofPawn", 1, 7), 
             Create("whiteHorsePawn", 2, 7), Create("whiteDebbabePawn", 3, 7),Create("whiteGiraffePawn", 4, 7),

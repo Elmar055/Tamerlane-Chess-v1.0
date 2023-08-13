@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -49,7 +50,6 @@ public class Chessman : MonoBehaviour
         return new Vector2Int(xBoard, yBoard);
     }
 
-    // Pozisyonu ayarlayan fonksiyon
     public void SetPosition(int x, int y)
     {
         xBoard = x;
@@ -256,7 +256,6 @@ public class Chessman : MonoBehaviour
                 }
                 PawnMovePlate(0, -1);
                 break;
-                break;
             
             case "blackCatapultPawn":
                 PawnMovePlate(0, 1);
@@ -443,7 +442,8 @@ public class Chessman : MonoBehaviour
                     GameObject cp = sc.GetPosition(x, y);
 
                     if (cp.name == "blackPawnPawn" && targetChessman.GetPosition().y == 9
-                            || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0)
+                            || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0
+                            || cp.name == "blackKing" || cp.name == "whiteKing")
                     {
 
                     }
@@ -456,7 +456,6 @@ public class Chessman : MonoBehaviour
         }
 
     }
-
 
     public void BlackKingMovePlate(int xIncrement, int yIncrement)
     {
@@ -485,7 +484,7 @@ public class Chessman : MonoBehaviour
         }
 
 
-
+        
         if (sc.PositionOnBoard(x, y))
         {
             Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
@@ -503,7 +502,8 @@ public class Chessman : MonoBehaviour
                     GameObject cp = sc.GetPosition(x, y);
 
                     if (cp.name == "blackPawnPawn" && targetChessman.GetPosition().y == 9
-                            || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0)
+                            || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0
+                            || cp.name == "blackKing" || cp.name == "whiteKing")
                     {
 
                     }
@@ -519,62 +519,68 @@ public class Chessman : MonoBehaviour
 
     public void WhiteKingMovePlate(int xIncrement, int yIncrement)
     {
+       
+
         Game sc = controller.GetComponent<Game>();
         int x = xBoard + xIncrement;
         int y = yBoard + yIncrement;
 
+        
 
         int ownChessmanX = xBoard;
-        int ownChessmanY = yBoard;
-        Chessman myChessman = sc.GetPosition(ownChessmanX, ownChessmanY)?.GetComponent<Chessman>();
+            int ownChessmanY = yBoard;
+            Chessman myChessman = sc.GetPosition(ownChessmanX, ownChessmanY)?.GetComponent<Chessman>();
 
-        Vector2Int chessmanPosition = myChessman.GetPosition();
+            Vector2Int chessmanPosition = myChessman.GetPosition();
 
-        if (chessmanPosition.x == 1 && chessmanPosition.y == 8 ||
-            chessmanPosition.x == 1 && chessmanPosition.y == 9 ||
-            chessmanPosition.x == 1 && chessmanPosition.y == 7)
-        {
-            MovePlateSpawn(0, 8);
-        }
+            if (chessmanPosition.x == 1 && chessmanPosition.y == 8 ||
+                chessmanPosition.x == 1 && chessmanPosition.y == 9 ||
+                chessmanPosition.x == 1 && chessmanPosition.y == 7)
+            {
+                MovePlateSpawn(0, 8);
+            }
 
-        if (chessmanPosition.x == 11 && chessmanPosition.y == 0 ||
-            chessmanPosition.x == 11 && chessmanPosition.y == 1 ||
-            chessmanPosition.x == 11 && chessmanPosition.y == 2)
-        {
-            MovePlateSpawn(12, 1);
-        }
+            if (chessmanPosition.x == 11 && chessmanPosition.y == 0 ||
+                chessmanPosition.x == 11 && chessmanPosition.y == 1 ||
+                chessmanPosition.x == 11 && chessmanPosition.y == 2)
+            {
+                MovePlateSpawn(12, 1);
+            }
 
         if (sc.PositionOnBoard(x, y))
         {
             Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
 
-            if (targetChessman == null)
-            {
-
-                MovePlateSpawn(x, y);
-            }
-            else
-            {
-
-                if (targetChessman.player != player)
+                if (targetChessman == null)
                 {
-                    GameObject cp = sc.GetPosition(x, y);
 
-                    if (cp.name == "blackPawnPawn" && targetChessman.GetPosition().y == 9
-                            || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0)
-                    {
+                    MovePlateSpawn(x, y);
+                }
+                else
+                {
 
-                    }
-                    else
+                    if (targetChessman.player != player)
                     {
-                        MovePlateAttackSpawn(x, y);
+                        GameObject cp = sc.GetPosition(x, y);
+
+                        if (cp.name == "blackPawnPawn" && targetChessman.GetPosition().y == 9
+                                || cp.name == "whitePawnPawn" && targetChessman.GetPosition().y == 0
+                                || cp.name == "blackKing" || cp.name == "whiteKing")
+                        {
+
+                        }
+                        else
+                        {
+                            MovePlateAttackSpawn(x, y);
+                        }
                     }
                 }
-            }
-        }
+            
 
+            
+            
+        } 
     }
-
 
     public void LineMovePlate(int xIncrement, int yIncrement)
     {
@@ -901,55 +907,6 @@ public class Chessman : MonoBehaviour
             mpScript.SetReference(gameObject);
             mpScript.SetCoords(matrixX, matrixY);
         
-    }
-
-    public void ForwardAttack(int matrixX, int matrixY)
-    {
-        //Get the board value in order to convert to xy coords
-        float x = matrixX;
-        float y = matrixY;
-        x *= 0.9215f;
-        y *= 0.8963f;
-
-        //Add constants (pos 0,0)
-        // daslarin pozisyonu
-        x += -5.55f;
-        y += -4.03f;
-        //Set actual unity values
-        //Set actual unity values
-
-
-        GameObject mp = Instantiate(forwardMove, new Vector3(x, y, -3.0f), Quaternion.identity);
-        
-    }
-
-    public bool PawnForwardAttackMove(int xIncrement, int yIncrement)
-    {
-        Game sc = controller.GetComponent<Game>();
-        int x = xBoard + xIncrement;
-        int y = yBoard + yIncrement;
-
-
-        if (sc.PositionOnBoard(x, y))
-        {
-            Chessman targetChessman = sc.GetPosition(x, y)?.GetComponent<Chessman>();
-            ForwardAttack(x, y);
-            if(targetChessman!=null && targetChessman.name == "King")
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void Start()
-    {
-        if(this.name == "blackKingPawn")
-        {
-            PawnForwardAttackMove(1, 1);
-            PawnForwardAttackMove(-1, 1);
-        }
-            
     }
 
     public void Update()
