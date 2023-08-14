@@ -120,18 +120,7 @@ public class Chessman : MonoBehaviour
         float x = xBoard;
         float y = yBoard;
 
-
-        //daslar arasi mesafe
-        x *= 0.9215f;
-        y *= 0.8963f;
-
-        //Add constants (pos 0,0)
-        // daslarin pozisyonu
-        x += -5.55f;
-        y += -4.03f;
-        //Set actual unity values
-
-        //Set actual unity values
+        
         this.transform.position = new Vector3(x, y, -1.0f);
     }
 
@@ -864,22 +853,12 @@ public class Chessman : MonoBehaviour
         //Get the board value in order to convert to xy coords
         float x = matrixX;
         float y = matrixY;
-        //Adjust by variable offset
-        // daslar arasi mesafe
-        x *= 0.9215f;
-        y *= 0.8963f;
-
-        //Add constants (pos 0,0)
-        // daslarin pozisyonu
-        x += -5.55f;
-        y += -4.03f;
-        //Set actual unity values
-        // Check if there is a movePlate at this position
         
-            GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
-            MovePlate mpScript = mp.GetComponent<MovePlate>();
-            mpScript.SetCoords(matrixX, matrixY);
-            mpScript.SetReference(gameObject);
+        
+        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -1.0f), Quaternion.identity);
+        MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.SetCoords(matrixX, matrixY);
+        mpScript.SetReference(gameObject);
         
 
     }
@@ -890,18 +869,10 @@ public class Chessman : MonoBehaviour
         //Get the board value in order to convert to xy coords
         float x = matrixX;
         float y = matrixY;
-        x *= 0.9215f;
-        y *= 0.8963f;
-
-        //Add constants (pos 0,0)
-        // daslarin pozisyonu
-        x += -5.55f;
-        y += -4.03f;
-        //Set actual unity values
-        //Set actual unity values
         
         
-            GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
+        
+            GameObject mp = Instantiate(movePlate, new Vector3(x, y, -1.0f), Quaternion.identity);
             MovePlate mpScript = mp.GetComponent<MovePlate>();
             mpScript.attack = true;
             mpScript.SetReference(gameObject);

@@ -13,6 +13,7 @@ public class Game : MonoBehaviour
 {
     // Add chesspiece prefab to this reference
     public GameObject chesspiece;
+    public GameObject tile;
 
     //We set up the board consisting of 13 columns and 10 rows as an array.
     //Normally the board consists of 11 columns and 10 rows.
@@ -32,6 +33,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GenerateTiles(0,0);
         // When Game starts. Create chesspieces in positions array
         // In here index starts 1 in x axis.
         // Because 11x10 matrix rows start from 1.
@@ -93,7 +95,33 @@ public class Game : MonoBehaviour
         
 
     }
-    
+
+    private void GenerateTiles(int x, int y)
+    {
+        Color[] colors = 
+            {
+                new Color(213f / 255f, 180f / 255f, 136f / 255f), // Normalleştirilmiş renk değerleri
+                new Color(249f / 255f, 238f / 255f, 246f / 255f)  // Normalleştirilmiş renk değerleri
+            };
+
+        for (x = 0; x < 13; x++)
+        {
+            for (y = 0; y < 10; y++)
+            {
+                if (!((x == 12 && y != 1) || (x == 0 && y != 8)))
+                {
+                    Color color = colors[(x + y) % colors.Length]; 
+                    GameObject newTile = Instantiate(tile, new Vector3(x, y, 0), Quaternion.identity);
+                    Renderer tileRenderer = newTile.GetComponent<Renderer>();
+                    tileRenderer.material.color = color;
+                }
+            }
+        }
+    }
+
+    //6.0139  4.5104
+    //0.7179256  0.7118536
+
     private IEnumerator HideMessageAfterSeconds()
     {
         // 
@@ -108,7 +136,7 @@ public class Game : MonoBehaviour
     //This function creates the chesspieces with the given name at the given coordinates.
     public GameObject Create(string name, int x, int y)
     {
-        GameObject obj = Instantiate(chesspiece, new Vector3(0, 0, -1), Quaternion.identity);
+        GameObject obj = Instantiate(chesspiece, new Vector3(0, 0, -3.0f), Quaternion.identity);
         Chessman cm = obj.GetComponent<Chessman>();
         cm.name = name;
         cm.SetXBoard(x);
@@ -116,6 +144,7 @@ public class Game : MonoBehaviour
         cm.Activate();
         return obj;
     }
+
 
 
 
