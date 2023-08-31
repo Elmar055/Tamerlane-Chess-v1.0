@@ -90,10 +90,6 @@ public class Game : MonoBehaviour
 
         StartCoroutine(HideMessageAfterSeconds());
 
-        
-        
-        
-
     }
 
     private void GenerateTiles(int x, int y)
@@ -119,19 +115,12 @@ public class Game : MonoBehaviour
         }
     }
 
-    //6.0139  4.5104
-    //0.7179256  0.7118536
-
     private IEnumerator HideMessageAfterSeconds()
     {
-        // 
         yield return new WaitForSeconds(3f);
 
-        // 
         messageText.text = "";
     }
-
-
 
     //This function creates the chesspieces with the given name at the given coordinates.
     public GameObject Create(string name, int x, int y)
@@ -144,10 +133,6 @@ public class Game : MonoBehaviour
         cm.Activate();
         return obj;
     }
-
-
-
-
 
     // Activate the object in the given position according to the indexes of the array
     // and move it to the position in the real scene
@@ -195,7 +180,6 @@ public class Game : MonoBehaviour
     public void NextTurn()
     {
 
-        
         if (currentPlayer == "white")
         {
             currentPlayer = "black";
@@ -205,9 +189,6 @@ public class Game : MonoBehaviour
             currentPlayer = "white";
         }
         
-
-
-
     }
 
     public void Update()
